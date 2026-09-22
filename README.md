@@ -20,3 +20,4 @@ DIY 双MCU机械键盘固件。
 UART，主控下发灯光指令给从机。
 
 ## License
+MIT

@@ -1,0 +1,12 @@
+*.uvguix.*
+*.lst
+build_output/
+RTE/
+*.axf
+*.hex
+*.o
+*.elf
+*.crf
+*.dep
+*.map
+.vsode/

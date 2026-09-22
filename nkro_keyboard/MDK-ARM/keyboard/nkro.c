@@ -8,11 +8,6 @@ bool NKRO_BufferManage_Init(NKRO_BufferManage* buffer_manage){
     if(buffer_manage == NULL){
         return false;
     }
-    // buffer_manage->function_key_flag = 0;
-    // buffer_manage->function_key      = 0;
-    // buffer_manage->check             = 0;
-    // buffer_manage->temp_check        = 0;
-    // buffer_manage->hash_structure                                 = hash_structure;
     static NKRO_Buffer nkro_instant_buffer                        = {0};
     buffer_manage->nkro_instant_buffer                            = &nkro_instant_buffer;
     static uint8_t static_instant_buffer[NKRO_REPORT_BUFFER_SIZE] = {0};
@@ -37,23 +32,15 @@ bool NKRO_Report_Init(NKRO_Report* report){
 }
 
 void clearBuffer(NKRO_Buffer* nkro_buffer){
-    // buffer_manage->function_key_flag = 0;
-    // buffer_manage->function_key      = 0;
     memset(nkro_buffer->buffer,0,nkro_buffer->buffer_size);
 }
 
 void push(NKRO_BufferManage* buffer_manage,uint8_t key){
-    // if(key == 0xE8){
-    //     buffer_manage.function_key_flag = 1;
-    //     return;
-    // }
-    // if(HashMark_Add(buffer_manage->hash_structure,key)){
     if(key >= 0xE0 && key <= 0xE7){
         buffer_manage->nkro_instant_buffer->buffer[0] |= (1<<(key-0xE0));
     }else{
         buffer_manage->nkro_instant_buffer->buffer[1 + (key / 8)] |= 1 << (key % 8);
     }
-    // }
 }
 
 uint8_t* fillReport(NKRO_BufferManage* buffer_manage,NKRO_Report* report){

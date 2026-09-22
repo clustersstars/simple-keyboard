@@ -1,23 +1,27 @@
 # simple-keyboard
-DIY 双MCU机械键盘固件。
-- 主控MCU：`nkro_keyboard`，STM32，USB NKRO键盘，负责按键扫描、USB HID上报
-- 灯光从机MCU：`nkro_ws2812b`，STM32，驱动WS2812B RGB灯，通过UART和主控通信
+DIY 双MCU机械键盘固件
 
-## 硬件架构
-双MCU独立运行，串口通信。
-主控负责按键检测、USB键盘报告；从机只管理RGB灯光。
+## 项目简介
+双STM32架构：
+- nkro_keyboard：主控MCU，实现按键扫描、USB NKRO键盘HID上报
+- nkro_ws2812b：灯光从机MCU，WS2812 RGB灯带控制，UART与主控通信
 
 ## 开发环境
-- Keil MDK5
-- STM32 HAL库
-- USB HID协议
+- IDE：Keil MDK5
+- 库：STM32 HAL库
+- 芯片：STM32F1系列
 
-## 编译说明
-1. nkro_keyboard：打开MDK工程，编译烧录主控MCU
-2. nkro_ws2812b：打开MDK工程，编译烧录灯光MCU
+## 编译&烧录
+1. 主控固件：`nkro_keyboard/MDK-ARM/nkro_keyboard.uvprojx`
+   编译，烧录到主控STM32
+2. 灯光固件：`nkro_ws2812b/MDK-ARM/nkro_ws2812b.uvprojx`
+   编译，烧录灯光从机STM32
 
 ## 通讯协议
-UART，主控下发灯光指令给从机。
+UART串口通信，主控下发RGB灯光指令至从机。
+
+## 硬件说明
+双MCU独立工作，串口互联；主控负责USB键盘，从机专职灯光。
 
 ## License
 MIT
